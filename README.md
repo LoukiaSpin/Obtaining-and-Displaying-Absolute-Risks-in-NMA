@@ -46,3 +46,10 @@ absolute_risk(data = baker,
               measure = "OR", 
               log = FALSE)
 ```
+```r
+  versus PBO point lower upper
+1       LABA   302   281   322
+2 Tiotropium   262   239   281
+3        ICS   305   279   333
+4   ICS+LABA   281   257   305
+```
