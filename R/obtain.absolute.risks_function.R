@@ -1,11 +1,11 @@
-#' Obtain absolute risks from published NMA results
+#' Obtain absolute risks from published Bayesian or frequentist NMA results
 #' 
-#' @param data A data-frame with the NMA effect sizes of comparisons with the
-#'   reference intervention of the network. The data-frame has \code{T-1} rows 
-#'   (\code{T} is the number of interventions in the network) and four columns 
-#'   that contain the name of the non-reference interventions, the point 
-#'   estimate, the lower and upper bound of the 95% (confidence or credible) 
-#'   interval of the corresponding comparison with the reference intervention.
+#' @param data A data-frame with the NMA effects of comparisons with the 
+#'   reference intervention of the network, known as basic parameters. The 
+#'   data-frame has \code{T-1} rows (\code{T} is the number of interventions in 
+#'   the network) and four columns that contain the name of the non-reference 
+#'   interventions, the point estimate, the lower and upper bound of the 95\% 
+#'   (confidence or credible) interval of the corresponding basic parameter.
 #' @param ref Character string with the name of the reference intervention.
 #' @param base_risk A number in the interval (0, 1) that indicates the baseline
 #'   risk for the selected reference intervention. 
@@ -13,16 +13,18 @@
 #'   For a binary outcome, the following can be considered: \code{"OR"}, 
 #'   \code{"RR"} or \code{"RD"} for the odds ratio, relative risk, and risk 
 #'   difference, respectively. 
-#' @param log Logical to indicate whether to export the tabulated results
-#'   to an 'xlsx' file (via the \code{\link[writexl:write_xlsx]{write_xlsx}}
+#' @param log Logical to indicate whether to exponentiate the dataset or not.
+#'
+#' @return A data-frame with same dimensions as \code{data} that contains the
+#'  names of the non-reference interventions (first column), the 
+#'  corresponding absolute risk (second column), lower and upper 95\% confidence
+#'  interval (third and fourth columns, respectively) per 1,000 participants.
+#'  
+#'   The function exports the data-frame with the caclulated absolute risks to 
+#'   an 'xlsx' file (via the \code{\link[writexl:write_xlsx]{write_xlsx}}
 #'   function of the R-package
 #'   \href{https://CRAN.R-project.org/package=writexl}{writexl}) at the working
 #'   directory of the user. 
-#'
-#' @return A data-frame with same dimensions as \code{data} that contains the
-#'  names of the non-reference interventions (first column), and the 
-#'  corresponding absolute risk (second column), lower and upper 95% confidence
-#'  interval (third and fourth columns, respectively) per 1,000 participants.
 #'
 #' @details The absolute risks have been estimated based on the transitive
 #'   risks framework, namely, an intervention has the same absolute risk 
@@ -51,6 +53,13 @@ absolute_risk <- function (data, ref, base_risk, measure, log) {
   
  
   # Missing and default arguments
+  data <- if (missing(data)) {
+    stop("The argument 'data' needs to be defined", call. = FALSE)
+  } else if (dim(data)[2] != 4) {
+    stop("The argument 'data' must have four columns", call. = FALSE)
+  } else {
+    data
+  }
   ref <- if (missing(ref)) {
     stop("The argument 'ref' needs to be defined", call. = FALSE)
   } else {
@@ -85,7 +94,7 @@ absolute_risk <- function (data, ref, base_risk, measure, log) {
   } else if (measure == "RR") {
     round(dataset * base_risk * 1000, 0)
   } else {
-    round((base_risk - dataset) * 1000, 0)
+    round((dataset + base_risk) * 1000, 0)
   }
   
   absol_risk <- data.frame(data[, 1], absol_risk0)
