@@ -5,7 +5,7 @@
 #'   data-frame has \code{T-1} rows (\code{T} is the number of interventions in 
 #'   the network) and four columns that contain the name of the non-reference 
 #'   interventions, the point estimate, the lower and upper bound of the 95\% 
-#'   (confidence or credible) interval of the corresponding basic parameter.
+#'   (confidence or credible) interval of the corresponding basic parameters.
 #' @param ref Character string with the name of the reference intervention.
 #' @param base_risk A number in the interval (0, 1) that indicates the baseline
 #'   risk for the selected reference intervention. 
