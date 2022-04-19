@@ -11,21 +11,13 @@
 
 
 
-## Load libraries
-list_of_packages <- c("readxl", "rnmamod")
-lapply(list_of_packages, require, character.only = TRUE); rm(list_of_packages) 
+## Load 'rnmamod' package
+library("rnmamod")
 
 
 
-## Load 'rnmamod' from GitHub
-#install.packages("devtools")
-#devtools::install_github("LoukiaSpin/rnmamod", force = TRUE)
-
-
-
-## Load datasets
-dogliotti <- as.data.frame(
-  read_excel("./31_Datasets/Dogliotti_Dataset.xlsx", na = "NA"))[, 7:15]
+## Load dataset
+load("./data/dogliotti_afresh.RData")
 
 
 
@@ -36,14 +28,14 @@ dogliotti_names <- c("control", "vitamin K antagonists", "apixaban", "aspirin",
 
 
 
-## Calculate median risk in reference intervention
+## Calculate median risk in each intervention
 netplot(data = dogliotti,
         drug_names = dogliotti_names,
-        save_xls = FALSE)
+        save_xls = FALSE)$table_interventions
 
 
 
-## Run RE-NMA models
+## Run RE-NMA model
 model_dogliotti <- run_model(data = dogliotti, 
                              measure = "RD",
                              model = "RE", 
@@ -55,37 +47,15 @@ model_dogliotti <- run_model(data = dogliotti,
                              n_iter = 100000, 
                              n_burnin = 10000, 
                              n_thin = 10)
+
+
+
+## Check convergence of model parameters
 mcmc_diagnostics(model_dogliotti, 
-                 par = c("abs_risk", "tau"))
+                 par = c("EM", "tau"))
 
 
 
 ## Create league-heatmap
-tiff("./30_Analysis/Figure 2.tiff", 
-     height = 25, 
-     width = 40, 
-     units = 'cm', 
-     compression = "lzw", 
-     res = 600)
 league_table_absolute(full = model_dogliotti, 
                       drug_names = dogliotti_names)
-dev.off()
-
-
-
-################################################################################
-forestplot(full = model_dogliotti,
-           compar = "vitamin K antagonist",
-           drug_names = dogliotti_names)
-
-data2 <- data.frame(vitamin_comp = c("coumarin", "dab150", "apixaban", "dab110", "rivar", "warfarin", "aspirin+", "aspirin", "no treat", "pbo"),
-                    point = c(0.51, 1.01, 1.04, 1.05, 1.06, 1.15, 1.27, 1.36, 1.69, 1.80),
-                    lower = c(0.20, 0.50, 0.57, 0.51, 0.51, 0.65, 0.68, 0.82, 0.66, 1.08),
-                    upper = c(1.23, 1.93, 1.88, 1.99, 2.01, 1.94, 2.24, 2.29, 4.33, 3.03))
-
-absolute_risk(data = data2, 
-              ref = "vitamin", 
-              base_risk = 0.053,
-              measure = "OR",
-              log = FALSE)
-

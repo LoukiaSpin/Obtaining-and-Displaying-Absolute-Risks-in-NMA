@@ -9,7 +9,7 @@
 
 
 
-## Load R functions
+## Load R function
 source("./R/obtain.absolute.risks_function.R")
 
 
@@ -33,14 +33,14 @@ rd <- data.frame(res$`versus PBO`,
                  res$point - 340, 
                  res$lower - 340, 
                  res$upper - 340)
-colnames(rd) <- colnames(res);
+colnames(rd) <- colnames(res)
 
 
 
 ## Bring all together
 table1 <- data.frame(baker,        # odds ratio (basic parameters) as published
                      res[, 2:4],   # calculated absolute risks
-                     rd[, 2:4])    # caclulated risk differences
+                     rd[, 2:4])    # calculated risk differences
 colnames(table1) <- c("versus PBO", 
                       "OR", "lower", "upper",
                       "AR", "lower", "upper",
