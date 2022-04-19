@@ -39,6 +39,19 @@ absolute_risk(data,
 
 #### Using the example 
 
+Read the data from the systematic review of [Baker et al. (2009)](https://pubmed.ncbi.nlm.nih.gov/19637942/) (see _baker_published_ in the __data__ folder). The data are odd ratios of comparisons with the placebo.
+
+```r
+baker
+       PBO_comp point lower upper
+#> 1       LABA  0.84  0.76  0.92
+#> 2 Tiotropium  0.69  0.61  0.76
+#> 3        ICS  0.85  0.75  0.97
+#> 4   ICS+LABA  0.76  0.67  0.85
+```
+
+Next, use the `absolute_risk()` function to obtain unique absolute risks assuming a baseline risk of 0.34 for the placebo (the median risk event across the plabo-controlled trials).
+
 ```r
 absolute_risk(data = baker, 
               ref = "PBO", 
@@ -47,9 +60,9 @@ absolute_risk(data = baker,
               log = FALSE)
 ```
 ```r
-  versus PBO point lower upper
-1       LABA   302   281   322
-2 Tiotropium   262   239   281
-3        ICS   305   279   333
-4   ICS+LABA   281   257   305
+     versus PBO point lower upper
+#> 1       LABA   302   281   322
+#> 2 Tiotropium   262   239   281
+#> 3        ICS   305   279   333
+#> 4   ICS+LABA   281   257   305
 ```
