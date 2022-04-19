@@ -36,3 +36,13 @@ absolute_risk(data,
 * base_risk: A number in the interval (0, 1) that indicates the baseline risk for the selected reference intervention.
 * measure: Character string indicating the effect measure of _data_. The following can be considered: _"OR"_, _"RR"_ or _"RD"_ for the odds ratio, relative risk, and risk difference, respectively. 
 * log: Logical to indicate whether to exponentiate the dataset or not.
+
+#### Using the example 
+
+```r
+absolute_risk(data = baker, 
+              ref = "PBO", 
+              base_risk = 0.34, 
+              measure = "OR", 
+              log = FALSE)
+```
