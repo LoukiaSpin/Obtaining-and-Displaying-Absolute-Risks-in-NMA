@@ -12,7 +12,7 @@ After downloading/cloning the repo, the user can use the .Rproj file to source a
 
 ## Output 
 
-[rnmamod](https://CRAN.R-project.org/package=rnamod) is the prerequisite R package.
+[rnmamod](https://CRAN.R-project.org/package=rnmamod) is the prerequisite R package.
 
 ### Replicate the results
 
