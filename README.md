@@ -1,6 +1,6 @@
 ***
 
-# Obtaining and displaying absolute risks in the context of multiple comparisons (COPD network)
+# Obtaining and displaying absolute risks in the context of multiple comparisons 
 
 ## Description of the repository
 
@@ -18,7 +18,7 @@ After downloading/cloning the repo, the user can use the .Rproj file to source a
 
 Open and run the R script of interest to replicate the results of the manuscript.
 
-### Obtain unique absolute risks using the published NMA results
+### Obtain unique absolute risks using the published NMA results (COPD network)
 
 To obtain the unique absolute risks for each intervention using the results of a published systematic review, employ the function `league_table_absolute_user()` which has the following (minimum required) syntax: 
 
@@ -51,7 +51,7 @@ baker
 #> 5 -0.2744368 -0.4004776 -0.16251893     2
 ```
 
-Next, use the `league_table_absolute_user()` function to obtain unique absolute risks assuming a baseline risk of 0.34 for the placebo (the median risk event across the placebo-controlled trials). The table includes the relative and absolute effects for the basic parameters. Interventions are sorted from the best to the worst based on the odds ratio value (see column 'order' in _baker_).
+Next, we use the `league_table_absolute_user()` function to obtain unique absolute risks assuming a baseline risk of 0.34 for the placebo (the median risk event across the placebo-controlled trials). The table includes the relative and absolute effects for the basic parameters. Interventions are sorted from the best to the worst based on the odds ratio value (see column 'order' in _baker_).
 
 ```r
 league_table_absolute_user(data = baker,
@@ -116,11 +116,19 @@ dogliotti
 #> 19  3  4 NA 111 140  NA 2808 2791   NA
 ```
 
-Next, use the `run_model()` function to obtain unique absolute risks assuming a baseline risk of 0.34 for the placebo (the median risk event across the placebo-controlled trials). The table includes the relative and absolute effects for the basic parameters. Interventions are sorted from the best to the worst based on the odds ratio value (see column 'order' in _baker_).
+Next, we employ the `run_model()` function to conduct the network meta-analysis using the following (minimum required) syntax:
 
 ```r
-league_table_absolute_user(data = baker,
-                           measure = "OR",
-                           base_risk = 0.34,
-                           drug_names = c("PBO", "LABA", "TIO", "ICS", "ICS+LABA"))
+model_dogliotti <- run_model(data = dogliotti, 
+                             measure = "RD",
+                             model = "RE", 
+                             heter_prior = list("halfnormal", 0, 1/(0.5)^2), 
+                             D = 0, 
+                             ref = 1,
+                             base_risk = 0.07,
+                             n_chains = 3, 
+                             n_iter = 100000, 
+                             n_burnin = 10000, 
+                             n_thin = 10)
 ```
+We performed a random-effects NMA (`model = "RE"`) using the risk difference (`measure = "RD"`), a half-normal prior distribution with scale of 0.5 for the between-trial standard deviation (`heter_prior = list("halfnormal", 0, 1/(0.5)^2)`), and a baseline risk at 0.34 (`base_risk = 0.07`). We ran three chains (`n_chains = 3`) of 100,000 iterations (`n_iter = 100000`), 10,000 burn-in (`n_burnin = 10000`) and a thinning of 10 (`n_thin = 10`). Mortality is a harmful outcome (`D = 0`): this argument is necessary to obtain the correct SUCRA values. The reference intervention is the _control_ (`ref = 1`)
