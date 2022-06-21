@@ -131,4 +131,20 @@ model_dogliotti <- run_model(data = dogliotti,
                              n_burnin = 10000, 
                              n_thin = 10)
 ```
-We performed a random-effects NMA (`model = "RE"`) using the risk difference (`measure = "RD"`), a half-normal prior distribution with scale of 0.5 for the between-trial standard deviation (`heter_prior = list("halfnormal", 0, 1/(0.5)^2)`), and a baseline risk at 0.34 (`base_risk = 0.07`). We ran three chains (`n_chains = 3`) of 100,000 iterations (`n_iter = 100000`), 10,000 burn-in (`n_burnin = 10000`) and a thinning of 10 (`n_thin = 10`). Mortality is a harmful outcome (`D = 0`): this argument is necessary to obtain the correct SUCRA values. The reference intervention is the _control_ (`ref = 1`)
+We performed a random-effects NMA (`model = "RE"`) using the risk difference (`measure = "RD"`), a half-normal prior distribution with scale of 0.5 for the between-trial standard deviation (`heter_prior = list("halfnormal", 0, 1/(0.5)^2)`), and a baseline risk at 0.07 (`base_risk = 0.07`). We ran three chains (`n_chains = 3`) of 100,000 iterations (`n_iter = 100000`), 10,000 burn-in (`n_burnin = 10000`) and a thinning of 10 (`n_thin = 10`). Mortality is a harmful outcome (`D = 0`): this argument is necessary to obtain the correct SUCRA values. The reference intervention is the _control_ (`ref = 1`).
+
+Finally, we use the `league_table_absolute()` function to create the league table with the relative and absolute effects for all interventions and possible pairwise comparisons:
+
+```r
+## Interventions names
+dogliotti_names <- c("control", "vitamin K antagonists", "apixaban", "aspirin", 
+                     "aspirin plus clopidogrel", "dabigatran 110mg", 
+                     "dabigatran 150mg", "rivaroxaban")
+
+league_table_absolute(full = model_dogliotti, 
+                      drug_names = dogliotti_names)
+```
+
+<div style="text-align: center"> 
+<img src="man/figures/Figure 2.png" width="800" height="551" align="center">
+</div>
