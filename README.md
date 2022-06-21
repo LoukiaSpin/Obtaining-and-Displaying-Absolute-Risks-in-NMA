@@ -49,7 +49,7 @@ baker
 #> 5 -0.2744368 -0.4004776 -0.16251893     2
 ```
 
-Next, use the `league_table_absolute_user()` function to obtain unique absolute risks assuming a baseline risk of 0.34 for the placebo (the median risk event across the placebo-controlled trials).
+Next, use the `league_table_absolute_user()` function to obtain unique absolute risks assuming a baseline risk of 0.34 for the placebo (the median risk event across the placebo-controlled trials). The table includes the relative and absolute effects for the basic parameters. Interventions are sorted from the best to the worst based on the OR value (see column 'order' in _baker_).
 
 ```r
 league_table_absolute_user(data = baker,
