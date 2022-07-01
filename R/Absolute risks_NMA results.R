@@ -27,6 +27,7 @@ league_table_absolute_user(data = baker,
                            drug_names = c("PBO", "LABA", "TIO", "ICS", "ICS+LABA"),
                            show = NULL)
 
+
 # Help for the function 'league_table_absolute_user'
 ?league_table_absolute_user
 
