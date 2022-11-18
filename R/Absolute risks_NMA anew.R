@@ -11,8 +11,7 @@
 
 
 
-## Load 'rnmamod' R package (development version)
-devtools::install_github("LoukiaSpin/rnmamod", force = T)
+## Load 'rnmamod' R package 
 library("rnmamod")
 
 

@@ -10,7 +10,6 @@
 
 
 ## Load 'rnmamod' R package (development version)
-devtools::install_github("LoukiaSpin/rnmamod", force = T)
 library(rnmamod)
 
 
