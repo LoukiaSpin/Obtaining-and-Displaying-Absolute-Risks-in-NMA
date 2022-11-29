@@ -145,6 +145,8 @@ league_table_absolute(full = model_dogliotti,
                       drug_names = dogliotti_names)
 ```
 
+
 <div style="text-align: center"> 
-<img src="man/figures/Figure_mortality.png" width="700" height="510" align="center">
+<img src="man/figures/Figure_mortality.png" width="700" height="410" align="center">
 </div>
+
