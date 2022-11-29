@@ -6,7 +6,7 @@
 
 The repository offers the typical structure of separate folders for data, and R scripts, respectively.
 * The __data__ folder includes three input .RData files: _baker_published_, _baker_network_, and _dogliotti_afresh_;
-* The __R__ folder includes three analysis scripts: use _Network plots.R_ to replicate Figure 1, use _Absolute risks_NMA anew.R_ to replicate Figure 2, and use _Absolute risks_NMA results.R_ to replicate Table 1 and appendix Figure 1 of the manuscript.
+* The __R__ folder includes four analysis scripts: use _Network plots.R_ to replicate Figure 2, use _Absolute risks_Bayesian NMA anew.R_ to replicate Figure 3, use _Absolute risks_NMA results.R_ to replicate Table 1 and appendix Figure 1 of the manuscript, and use _Absolute risks_Frequentist NMA anew.R_ to replicate appendix Figure 2 of the manuscript.
 
 After downloading/cloning the repo, the user can use the .Rproj file to source all code.
 
@@ -146,5 +146,5 @@ league_table_absolute(full = model_dogliotti,
 ```
 
 <div style="text-align: center"> 
-<img src="man/figures/Figure_mortality.png" width="700" height="510" align="center">
+<img src="man/figures/Figure_mortality2.png" width="850" height="600"
 </div>
