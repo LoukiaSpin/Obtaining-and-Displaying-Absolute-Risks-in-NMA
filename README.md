@@ -146,5 +146,5 @@ league_table_absolute(full = model_dogliotti,
 ```
 
 <div style="text-align: center"> 
-<img src="man/figures/Figure_mortality.png" width="950" height="750"
+<img src="man/figures/Figure_mortality.png" width="950" height="650"
 </div>
