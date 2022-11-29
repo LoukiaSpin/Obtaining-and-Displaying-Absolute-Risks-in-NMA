@@ -25,7 +25,7 @@ load("./data/dogliotti_afresh.RData")
 
 
 ## Interventions names
-baker_names <- c("PBO", "LABA", "ICS", "ICS plus \n LABA", "tiotropium")
+baker_names <- c("placebo", "LABA", "ICS", "ICS plus \n LABA", "tiotropium")
 
 dogliotti_names <- c("control", "vitamin K \n  antagonists", "apixaban", "aspirin", 
                      "aspirin plus \n clopidogrel", "dabigatran 110mg", 

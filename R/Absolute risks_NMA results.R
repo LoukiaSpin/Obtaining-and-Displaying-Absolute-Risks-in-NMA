@@ -23,7 +23,7 @@ load("./data/baker_published.RData")
 league_table_absolute_user(data = baker,
                            measure = "OR",
                            base_risk = 0.34,
-                           drug_names = c("PBO", "LABA", "TIO", "ICS", "ICS+LABA"),
+                           drug_names = c("placebo", "LABA", "TIO", "ICS", "ICS+LABA"),
                            show = NULL)
 
 
