@@ -1,7 +1,7 @@
 #*******************************************************************************
 #*
 #*
-#*                      Run Network Meta-Analysis 'anew'                     
+#*                  Run Bayesian Network Meta-Analysis 'anew'                                       
 #*     Binomial likelihood, logit link, Random Effects NMA (PMID: 23104435)     
 #*     (Half-normal prior distribution on between-trial standard deviation)            
 #*              <Absolute risks using transitive risks assumption>                                  

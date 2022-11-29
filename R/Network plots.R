@@ -10,7 +10,7 @@
 
 
 
-## Load library
+## Load 'rnmamod' R package
 library("rnmamod")
 
 
